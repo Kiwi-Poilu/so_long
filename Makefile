@@ -1,4 +1,4 @@
-NAME = so_long
+NAME =	so_long
 
 INC =	include
 
@@ -10,13 +10,7 @@ SRCS =	srcs/main.c \
 	srcs/ft_putnbr.c \
 	srcs/ft_split.c
 
-UNAME_S = $(shell uname -s)
-
-ifeq ($(UNAME_S),Darwin)
-	MLX = minilibx_opengl_20191021
-else
-	MLX = minilibx-linux
-endif
+MLX = mlx_linux
 
 OBJS = ${SRCS:.c=.o}
 
@@ -26,23 +20,22 @@ RM = rm -f
 
 CFLAGS = -Wall -Wextra -Werror
 
+FLAGS_MLX=-L/usr/lib -lXext -lX11 -lm
+
 all: $(NAME)
 
 %.o:  %.c
-	$(CC) $(CFLAGS) -I$(INC) -Imlx -c $< -o $@
+	$(CC) $(CFLAGS) $< -I$(INC) -c -o $@
 
-$(NAME) : $(OBJS) $(MLX)/libmlx.a
-	$(CC) $(CFLAGS) $(OBJS) $(MLX)/libmlx.a -lm -o $(NAME)
-
-$(MLX)/libmlx.a:
-	cd $(MLX) && make
+$(NAME) : $(OBJS) 
+	-make -C mlx_linux
+	$(CC) $(CFLAGS) $(OBJS) -Lmlx_linux -lmlx_Linux $(FLAGS_MLX) -Imlx_linux -o $(NAME) 
 
 clean :
 	$(RM) $(OBJS)
-	cd $(MLX) && make clean
 
 fclean : clean
+	-make clean -C mlx_linux 
 	$(RM) $(NAME)
-	cd $(MLX) && make clean
 
 re : fclean all

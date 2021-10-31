@@ -94,7 +94,7 @@ int	parsing(char **map)
 	ret += check_walls(map[i], 0);
 	return (ret);
 }
-
+/*
 int	main(int ac, char **av)
 {
 	int ret_gnl;
@@ -104,19 +104,26 @@ int	main(int ac, char **av)
 	char *tmp;
 
 	ret_gnl = 1;
+	
 	fd = 0;
+	printf("caca");
 	fd = open(av[1], O_RDONLY);
 	printf("fd = %d\n", fd);
+	printf("Caca");
 	if (ac != 2)
 	{
 		ft_putstr("Wrong number of arguments\n");
 		return (0);
 	}
+	printf("Yo");
 	while (ret_gnl)
 	{
+		printf("Salut");
 		ret_gnl = get_next_line(fd, &line);
 		tmp = ft_strjoin(tmp, line);
+		printf("salut");
 		tmp = ft_strjoin(tmp, " ");
+		printf("Yo");
 		free(line);
 	}
 	map = ft_split(tmp, ' ');
@@ -125,3 +132,17 @@ int	main(int ac, char **av)
 	printf("%s\n", map[i++]);
 	printf("parsing = %d\n", parsing(map));
 }
+int		main(void)
+{
+	void	*mlx;
+	mlx  = mlx_init();
+}
+*/
+
+int	main(int ac, char **av)
+{	
+	ac++;
+	int fd = open(av[1], O_RDONLY);
+	printf("fd = %d\n", fd);
+}
+
